@@ -1,0 +1,82 @@
+body {
+  font-family: "Poppins", sans-serif;
+  padding: 0;
+  margin: 0;
+  background: url(/assets/img/bg-campo.png);
+  background-size: cover;
+}
+
+.app {
+  width: 65%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 2rem;
+}
+
+.app__titulo,
+.app__cronometro {
+  color: #f7dd43;
+}
+
+.titulo__imagem {
+  width: 40%;
+}
+
+.titulo__texto {
+  font-size: 1.2rem;
+}
+
+.app__cronometro {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.app__cronometro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: #1a1f1b;
+
+  padding: 2rem;
+
+  border-bottom: 5px solid #f7dd43;
+  border-radius: 0.5rem;
+}
+
+.app__cronometro div {
+  padding: 1rem;
+}
+
+.app__cronometro p {
+  font-size: 2rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .app {
+    padding: 3rem 2rem;
+  }
+
+  .app__titulo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .titulo__imagem {
+    width: 20%;
+  }
+
+  .titulo__texto {
+    font-size: 4rem;
+  }
+
+  .app__cronometro {
+    font-size: 4rem;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+}
