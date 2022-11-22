@@ -1,36 +1,51 @@
 const cronometro = document.querySelector("[data-cronometro]");
 
+//
+// APP
 const atualizaCronometro = () => {
   const dataAtual = new Date();
-  const dataCOPA = new Date(2022, 10, 20, 13, 0);
+  const dataInicioCopa = new Date(2022, 10, 20, 13, 0);
+  const dataFinalCopa = new Date(2022, 11, 18, 12, 0);
 
+  if (dataAtual >= dataInicioCopa) {
+    const titulo = document.querySelector(".titulo__texto");
+    console.log(titulo);
+    titulo.innerText = "Contagem regressiva para o Hexa!";
+    cronometro.innerHTML = conteudoCronometro(
+      tempoRestante(dataFinalCopa, dataAtual)
+    );
+  } else {
+    titulo.innerText = "A Copa do Mundo começa em";
+    cronometro.innerHTML = conteudoCronometro(
+      tempoRestante(dataInicioCopa, dataAtual)
+    );
+  }
+};
+
+const tempoRestante = (dataFinal, dataAtual) => {
   const dias = parseInt(
-    (dataCOPA.getTime() - dataAtual.getTime()) / (1000 * 3600 * 24)
+    (dataFinal.getTime() - dataAtual.getTime()) / (1000 * 3600 * 24)
   );
   const horas = parseInt(
-    (dataCOPA.getTime() - dataAtual.getTime()) / (1000 * 3600)
+    ((dataFinal.getTime() - dataAtual.getTime()) / (1000 * 3600)) % 24
   );
   const minutos = parseInt(
-    ((dataCOPA.getTime() - dataAtual.getTime()) / (1000 * 60)) % 60
+    ((dataFinal.getTime() - dataAtual.getTime()) / (1000 * 60)) % 60
   );
-
-  if (dias <= 0 && horas <= 0 && minutos <= 0) {
-    const titulo = document.querySelector(".titulo__texto");
-    titulo.innerText = "A Copa já começou, meu parceiro!";
-    cronometro.innerHTML =
-      "<img src='assets/img/element-catar.svg'>  &#11088;&#11088;&#11088;&#11088;&#11088; <br>Agora é Hexa! <img src='assets/img/element-catar.svg'>";
-  } else {
-    cronometro.innerHTML = conteudoCronometro(dias, horas, minutos);
-  }
+  const segundos =
+    parseInt((dataFinal.getTime() - dataAtual.getTime()) / 1000) % 60;
+  return { dias, horas, minutos, segundos };
 };
 
 setInterval(atualizaCronometro, 1000);
 
+//
+// Serviços
 const validaDigito = (numero) => {
   return numero < 10 ? "0" + numero : numero;
 };
 
-const conteudoCronometro = (dias, horas, minutos) => {
+const conteudoCronometro = ({ dias, horas, minutos, segundos }) => {
   return `
     <div class="cronometro__dias">
       <span> ${validaDigito(dias)} </span>
@@ -45,6 +60,11 @@ const conteudoCronometro = (dias, horas, minutos) => {
     <div class="cronometro__minutos">
       <span>${validaDigito(minutos)}</span>
       <p>minutos</p>
+    </div>
+    <img src="assets/img/element-catar.svg">
+    <div class="cronometro__segundos">
+      <span>${validaDigito(segundos)}</span>
+      <p>segundos</p>
     </div>
   `;
 };
