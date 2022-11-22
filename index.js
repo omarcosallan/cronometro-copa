@@ -9,7 +9,6 @@ const atualizaCronometro = () => {
 
   if (dataAtual >= dataInicioCopa) {
     const titulo = document.querySelector(".titulo__texto");
-    console.log(titulo);
     titulo.innerText = "Contagem regressiva para o Hexa!";
     cronometro.innerHTML = conteudoCronometro(
       tempoRestante(dataFinalCopa, dataAtual)
